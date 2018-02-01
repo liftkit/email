@@ -20,49 +20,30 @@
 		 */
 		protected $phpMailer;
 
-
-		protected $useSMTP;
-		protected $host;
-		protected $port;
-		protected $username;
-		protected $password;
+		protected $originalPhpMailer;
 
 
 		public function __construct ($smtp = false, $host = null, $port = null, $username = null, $password = null, PHPMailer $phpMailer = null)
 		{
 			$this->phpMailer = $phpMailer ?: new PHPMailer;
 
-			$this->useSMTP = $smtp;
-			$this->host = $host;
-			$this->port = $port;
-			$this->username = $username;
-			$this->password = $password;
-
-			if ($this->useSMTP) {
+			if ($smtp) {
 				$this->phpMailer->Mailer   = 'smtp';
 				$this->phpMailer->SMTPAuth = true;
 
-				$this->phpMailer->Host     = $this->host;
-				$this->phpMailer->Port     = $this->port;
-				$this->phpMailer->Username = $this->username;
-				$this->phpMailer->Password = $this->password;
+				$this->phpMailer->Host     = $host;
+				$this->phpMailer->Port     = $port;
+				$this->phpMailer->Username = $username;
+				$this->phpMailer->Password = $password;
 			}
+
+			$this->originalPhpMailer = clone $this->phpMailer;
 		}
 
 
 		public function clear ()
 		{
-			$this->phpMailer = new PhpMailer();
-
-			if ($this->useSMTP) {
-				$this->phpMailer->Mailer   = 'smtp';
-				$this->phpMailer->SMTPAuth = true;
-
-				$this->phpMailer->Host     = $this->host;
-				$this->phpMailer->Port     = $this->port;
-				$this->phpMailer->Username = $this->username;
-				$this->phpMailer->Password = $this->password;
-			}
+			$this->phpMailer = clone $this->originalPhpMailer;
 
 			return $this;
 		}
