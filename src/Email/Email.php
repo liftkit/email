@@ -49,6 +49,14 @@
 		}
 
 
+		public function header ($name, $value)
+		{
+			$this->phpMailer->addCustomHeader($name, $value);
+
+			return $this;
+		}
+
+
 		public function body ($string)
 		{
 			$this->phpMailer->Body = $string;
