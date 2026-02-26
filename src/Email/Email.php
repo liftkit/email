@@ -2,7 +2,7 @@
 
 	namespace LiftKit\Email;
 
-	use PHPMailer;
+	use PHPMailer\PHPMailer\PHPMailer;
 	use LiftKit\Email\Exception\Email as EmailException;
 
 
@@ -99,7 +99,12 @@
 
 		public function send ()
 		{
-			if (! $this->phpMailer->Send()) {
+			try {
+				if (! $this->phpMailer->Send()) {
+					throw new EmailException($this->phpMailer->ErrorInfo);
+				}
+
+			} catch (PHPMailer\PHPMailer\Exception $e) {
 				throw new EmailException($this->phpMailer->ErrorInfo);
 			}
 		}

@@ -3,7 +3,7 @@
 	namespace LiftKit\Tests\Email;
 
 	use LiftKit\Tests\Helpers\Email\TestCase;
-	use PHPUnit_Framework_MockObject_MockObject;
+	use PHPUnit\Framework\MockObject\MockObject;
 	use LiftKit\Email\Email;
 	use PHPMailer;
 
@@ -17,14 +17,14 @@
 
 
 		/**
-		 * @var PHPUnit_Framework_MockObject_MockObject
+		 * @var PHPUnit\Framework\MockObject\MockObject
 		 */
 		protected $mockMailer;
 
 
-		public function setUp ()
+		public function setUp () : void
 		{
-			$this->mockMailer = $this->getMockBuilder('\PHPMailer')
+			$this->mockMailer = $this->getMockBuilder('\PHPMailer\PHPMailer\PHPMailer')
 				->getMock();
 		}
 
@@ -139,11 +139,9 @@
 		}
 
 
-		/**
-		 * @expectedException \LiftKit\Email\Exception\Email
-		 */
 		public function testSend ()
 		{
+			$this->expectException(\LiftKit\Email\Exception\Email::class);
 			$this->mockMailer->expects($this->once())
 				->method('Send');
 
