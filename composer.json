@@ -12,7 +12,10 @@
 			"LiftKit\\": "src/",
 			"LiftKit\\Tests\\Helpers\\": "tests/helpers/",
 			"LiftKit\\Tests\\Unit\\": "tests/unit/"
-		}
+		},
+		"files": [
+			"phpmailer-shim.php"
+		]
 	},
 	"license": "LGPL-2.1-only",
 	"authors": [
