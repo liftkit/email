@@ -23,7 +23,7 @@
 		protected $originalPhpMailer;
 
 
-		public function __construct ($smtp = false, $host = null, $port = null, $username = null, $password = null, PHPMailer $phpMailer = null)
+		public function __construct ($smtp = false, $host = null, $port = null, $username = null, $password = null, ?PHPMailer $phpMailer = null)
 		{
 			$this->phpMailer = $phpMailer ?: new PHPMailer;
 
